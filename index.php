@@ -33,6 +33,23 @@ The require_once keyword is used to embed PHP code from another file. If the fil
 
 
 <div class="container">
+   <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-4">
+            <form action="process.php" method="post">
+                <div class="form-group m-3">
+                    <label for="product">Product</label>
+                    <input type="text" placeholder="Wrist Watch" name="product" class="form-control" id="product" required>
+                </div>
+                <div class="form-group m-3">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" placeholder="$5" id="price" name="price" min="0" required>
+                </div>
+                <div class="m-3">
+                    <button type="submit" class="btn btn-primary" name="save">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row justify-content-center">
        <div class="col-sm-12 col-md-8">
         <!-- reading data from database -->
@@ -74,23 +91,6 @@ The require_once keyword is used to embed PHP code from another file. If the fil
             
         </table>
        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-6 col-md-4">
-            <form action="process.php" method="post">
-                <div class="form-group m-3">
-                    <label for="product">Product</label>
-                    <input type="text" placeholder="Wrist Watch" name="product" class="form-control" id="product" required>
-                </div>
-                <div class="form-group m-3">
-                    <label for="price">Price</label>
-                    <input type="number" class="form-control" placeholder="$5" id="price" name="price" min="0" required>
-                </div>
-                <div class="m-3">
-                    <button type="submit" class="btn btn-primary" name="save">SAVE</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 </body>
