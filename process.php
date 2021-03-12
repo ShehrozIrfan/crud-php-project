@@ -1,7 +1,14 @@
 <?php include "db_connection.php" ?>
-<?php 
+<?php
+    
+    
+//starting the session
+session_start();
+
 //inserting data into the database.
 if(isset($_POST['save'])) {
+    
+    
     $product = $_POST['product'];
     $price = $_POST['price'];
     
@@ -13,6 +20,13 @@ if(isset($_POST['save'])) {
     if(!$result) {
         die("Query Failed .. !" . mysqli_error($connection));
     }
+    
+    $_SESSION['message'] = "Record has been saved!";
+
+    $_SESSION['msg_type'] = "success";
+    
+    //redirecting to index.php
+    header("location: index.php");
 }
 
 

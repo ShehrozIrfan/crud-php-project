@@ -1,8 +1,13 @@
 <?php include "db_connection.php" ?>
+<?php include "process.php" ?>
 <?php 
-
+    
 //deleting the record
 if(isset($_GET['delete'])) {
+    
+    //starting the session
+    //session_start();
+    
     $id = $_GET['delete'];
     $query = "DELETE FROM data ";
     $query .= "WHERE id = $id";
@@ -12,6 +17,10 @@ if(isset($_GET['delete'])) {
     if(!$result) {
         die("Query Failed." . mysqli_error($connection));
     }
+    
+    $_SESSION['message'] = "Record has been deleted!";
+    
+    $_SESSION['msg_type'] = "danger";
 }
 
 ?>
@@ -29,8 +38,28 @@ if(isset($_GET['delete'])) {
 The require_once keyword is used to embed PHP code from another file. If the file is not found, a fatal error is thrown and the program stops. If the file was already included previously, this statement will not include it again.
 
 -->
+<?php require_once "process.php" ?>
 
 
+<?php 
+    if(isset($_SESSION['message'])) {
+?>
+<div class="alert alert-<?php echo $_SESSION['msg_type']; ?>">
+    
+    <?php 
+    
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    
+    ?>
+    
+</div>
+
+<?php 
+
+    }
+    
+?>
 
 <div class="container">
    <div class="row justify-content-center">
