@@ -24,6 +24,34 @@ if(isset($_GET['delete'])) {
 }
 
 ?>
+<?php 
+//updating the record.
+
+//make sure that, when the edit button is not clicked then we can have the default value in the fields as empty.
+$product = ' ';
+$price = ' ';
+
+$update = false;
+if(isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    
+    $query = "SELECT * FROM data ";
+    $query .= "WHERE id = $id";
+    
+    $result = mysqli_query($connection, $query);
+    
+    if(!$result) {
+        die("Query Failed." .  mysqli_error($connection));
+    }
+    
+    $row = mysqli_fetch_assoc($result);
+    $product = $row['product'];
+    $price = $row['price'];
+
+    $update = true;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,16 +93,38 @@ The require_once keyword is used to embed PHP code from another file. If the fil
    <div class="row justify-content-center">
         <div class="col-sm-6 col-md-4">
             <form action="process.php" method="post">
+               <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div class="form-group m-3">
                     <label for="product">Product</label>
-                    <input type="text" placeholder="Wrist Watch" name="product" class="form-control" id="product" required>
+                    <input 
+                    type="text" placeholder="Wrist Watch" 
+                    name="product" class="form-control" id="product" 
+                    value="<?php echo $product; ?>"
+                    required>
                 </div>
                 <div class="form-group m-3">
                     <label for="price">Price</label>
-                    <input type="number" class="form-control" placeholder="$5" id="price" name="price" min="0" required>
+                    <input 
+                    type="number" class="form-control" 
+                    placeholder="$5"
+                    id="price" 
+                    name="price" 
+                    value="<?php echo $price; ?>"
+                    min="0" 
+                    required>
                 </div>
                 <div class="m-3">
+                   <?php
+                    
+                    if($update == true) {
+                    
+                    ?>
+                    <button type="submit" class="btn btn-warning" name="update">UPDATE</button>
+                    <?php } else { ?>
+                    
                     <button type="submit" class="btn btn-primary" name="save">SAVE</button>
+                    
+                    <?php } ?>
                 </div>
             </form>
         </div>
